@@ -1,3 +1,12 @@
+//Required to Write Files and call Prompts
+const inquirer = require('inquirer');
+const fs = require('fs');
+const util = require('util');
+
+//Code to input prompts into HTML
+const generateHTML = ``;
+
+//Classes for Javascript
 const Employee = require("./lib/employee");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
@@ -24,7 +33,7 @@ const promptUser = () => {
         },
         {
             type:'input',
-            name:'manager id',
+            name:'id',
             message: 'What is your employee ID?'
         },
         {
