@@ -12,9 +12,9 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 
-const writeFileAsync = util.promisfy(fs.writeFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
-const promptUser = () => {
+const createManager = () => {
     return inquirer.prompt([
         {
             type:'input',
@@ -46,6 +46,9 @@ const promptUser = () => {
             name: 'office',
             message: 'What is your office number?'
         },
+
+///NEW FUNCTION
+
         {
             type: 'list',
             name: 'add',
@@ -59,13 +62,36 @@ const promptUser = () => {
             type: 'list',
             name: 'team',
             choices: [
-                'An Manager',
                 'An Engineer',
                 'An Intern',
+                'No more team memebers'
             ]
+        
         }
+    
     ])
+    .then (userChoice  => {
+        switch(userChoice.team){
+            case 'An Engineer':
+                addEngineer()
+            break;
+            case 'An Intern':
+                addIntern()
+            break;
+            default: init()
+        }
+    });
 }
+const addEngineer = () => {
+    //Prompt for every thing engineer related    
+    .then(answers => {
+        const Engineer = new Engineer(answers.name, answers.id, answers.email)
+
+    // createTeam(){}
+    
+    });
+}
+
 
 const init = () => {
     promptUser()

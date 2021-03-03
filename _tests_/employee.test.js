@@ -1,26 +1,42 @@
-const { it, expect } = require('@jest/globals');
-const { describe } = require('yargs');
 const Employee = require('../lib/employee');
 
 describe("Employee class", () =>{
     describe("getName method", () => {
         it("it will return the employees name from the Prompt", () => {
-            const name = 'Jim';
             
-            const employee = new Employee(name);
             
-            employee.getName("Jim");
+            const employee = new Employee('Jim');
             
-            expect(employee.name).toEqual(name);
+            employee.getName(name);
+            
+            expect(employee.name).toEqual('Jim');
         });
     });
 
-    describe(" getId method", () => {
+    describe("getId method", () => {
         it("it will return the employees id number from the prompt", () => {
-            const employee = new Employee({name: "Jim", id: "001", email:"jim@gmail.com", role:"engineer"}
-            );
-            employee.getId("001");
-            expect(employee.id).toBe("001")
+
+            const id = '001';
+
+            const employee = new Employee('Jim',id);
+
+            
+            employee.getId(id);
+            
+            expect(employee.id).toEqual('001');
+        });
+    });
+    describe("getEmail method", () => {
+        it("it will return the employees id number from the prompt", () => {
+
+            const email = 'chin@gmail.com';
+
+            const employee = new Employee('Jim','001', email);
+
+            
+            employee.getEmail(email);
+            
+            expect(employee.email).toEqual(email);
         });
     });
 });
