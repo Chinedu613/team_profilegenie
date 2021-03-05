@@ -4,7 +4,6 @@ describe("Employee class", () =>{
     describe("getName method", () => {
         it("it will return the employees name from the Prompt", () => {
             
-            
             const employee = new Employee('Jim');
             
             employee.getName(name);
@@ -14,7 +13,7 @@ describe("Employee class", () =>{
     });
 
     describe("getId method", () => {
-        it("it will return the employees id number from the prompt", () => {
+        it("it will return the employees id number from the prompt and add to object", () => {
 
             const id = '001';
 
@@ -26,6 +25,7 @@ describe("Employee class", () =>{
             expect(employee.id).toEqual('001');
         });
     });
+    
     describe("getEmail method", () => {
         it("it will return the employees id number from the prompt", () => {
 

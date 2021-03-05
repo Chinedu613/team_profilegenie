@@ -14,22 +14,12 @@ const Manager = require("./lib/manager");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-const createManager = () => {
-    return inquirer.prompt([
+const createTeam = () => {
+    inquirer.prompt([
         {
             type:'input',
             name: 'name',
             message: 'Can you tell us your name?'
-        },
-        {
-            type: 'list',
-            name: 'role',
-            message: 'What is the team memeber\'s roles?',
-            choices: [
-                'Manager',
-                'Employee',
-                'Intern'
-            ]
         },
         {
             type:'input',
@@ -42,13 +32,35 @@ const createManager = () => {
             message: 'Please add your email:'
         },
         {
-            type: 'input',
-            name: 'office',
-            message: 'What is your office number?'
-        },
+            type: 'choice',
+            name: 'role',
+            message: 'What is your team role?',
+            choices:[
+                'Manager',
+                'Engineer',
+                'Intern',
+            ]
+        }
+    ])
+    .then (userChoice  => {
+        switch(userChoice.role){
+            case 'Manager':
+                addManager()
+            break;
+            case 'Engineer':
+                addEngineer()
+            break;
+            case 'Intern':
+                addIntern()
+            break;
+            default: init()
+        }
+    });
+}
 
 ///NEW FUNCTION
-
+    .then(() => {
+        inquirer.prompt([
         {
             type: 'list',
             name: 'add',
@@ -57,7 +69,10 @@ const createManager = () => {
                 'Yes',
                 'No'
             ]
-        },
+        }
+    ])
+    if (answers.add === 'Yes'){
+        inquirer.prompt([
         {
             type: 'list',
             name: 'team',
@@ -65,30 +80,49 @@ const createManager = () => {
                 'An Engineer',
                 'An Intern',
                 'No more team memebers'
-            ]
-        
+            ]}
+    ]);
+    }
+    return init();
+})
+
+//Functions to ask Role specific Questions and to seperate into different objects
+const addEngineer = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name:'github',
+            message:'What is your Github Username?'
         }
-    
     ])
-    .then (userChoice  => {
-        switch(userChoice.team){
-            case 'An Engineer':
-                addEngineer()
-            break;
-            case 'An Intern':
-                addIntern()
-            break;
-            default: init()
-        }
+    .then(answers => {
+        const Engineer = new Engineer(answers.name, answers.id, answers.email, answers.git)
+    // createTeam(){}
+
     });
 }
-const addEngineer = () => {
-    //Prompt for every thing engineer related    
+const addIntern = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What School do you attend?'
+        }
+    ])
     .then(answers => {
-        const Engineer = new Engineer(answers.name, answers.id, answers.email)
-
-    // createTeam(){}
-    
+        const Intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+    });
+}
+const addManager = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'office',
+            message: 'What is your office number?'
+        }
+    ])
+    .then(answers => {
+        const Manager = new Manager(answers.name, answers.id, answers.email, answers.office)
     });
 }
 

@@ -4,25 +4,13 @@ describe("Engineer class", () =>{
     describe("getName method", () => {
         it("it will return the employees name from the Prompt", () => {
             
+            let github = 'repo'
             
-            const engineer = new Engineer('repo');
+            const engineer = new Engineer('any','any','any', github);
 
-            engineer.getGit(git);
+            engineer.getGit(github);
             
-            expect(engineer.git).toEqual('repo');
-        });
-    });
-
-    describe("getId method", () => {
-        it("it will return the employees id number from the prompt", () => {
-
-            const engineer = new Engineer('Engineer');
-            
-            const role = 'Engineer';
-            
-            engineer.getRole(role);
-            
-            expect(engineer.role).toEqual('Engineer')
+            expect(engineer.github).toEqual('repo');
         });
     });
 });

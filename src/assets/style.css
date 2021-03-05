@@ -1,0 +1,18 @@
+body {
+    height: 100%;
+}
+
+header {
+    background-color: #488286;
+    height: 100px;
+}
+
+main {
+    background-color: #b7d5b7;
+    height: 100vh;
+}
+
+footer {
+    background-color: #488286;
+    height: 80px;
+}
