@@ -121,8 +121,6 @@ const addAnother = () => {
         message: "Would you like to add another memeber to your team?",
         choices: ["Yes", "No"],
     }])
-    
-    .prompt([
     .then((answers) => {
         if (answers.add === "Yes") {
         inquirer.prompt([
@@ -137,7 +135,7 @@ const addAnother = () => {
 };
 
 const init = () => {
-    promptUser()
+    createTeam()
     .then((info) => writeFileAsync("index.html", generateHTML(info)))
     .then(() => console.log("Successfully wrote to index.html"))
     .catch((err) => console.error(err));
