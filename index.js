@@ -4,7 +4,7 @@ const fs = require("fs");
 const util = require("util");
 
 //Code to input prompts into HTML
-const generateHTML = ``;
+const generateHTML = require('./src/generateRole');
 
 //Classes for Javascript
 const Employee = require("./lib/employee");
@@ -12,132 +12,112 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 
-const writeFileAsync = util.promisify(fs.writeFile);
+ const teamArr = [];
 
-const createTeam = () => {
-    inquirer
+const writeFileAysnc = util.promisify(fs.writeFile); 
+
+const createTeam = () =>  {
+  return inquirer
     .prompt([
-    {
+      {
+        type: "list",
+        name: "role",
+        message: "Team memember's role?",
+        choices: ["Manager", "Engineer", "Intern", "Exit"],
+      },
+      {
         type: "input",
         name: "name",
-        message: "Can you tell us your name?",
-    },
-    {
+        message: "Please add team memeber's name:",
+        when: (answers) => answers.role !== "Exit" 
+      },
+      {
         type: "input",
         name: "id",
-        message: "What is your employee ID?",
-    },
-    {
+        message: "Team memember's employee ID:",
+        when: (answers) => answers.role !== "Exit"
+      },
+      {
         type: "input",
         name: "email",
-        message: "Please add your email:",
-    },
-    {
-        type: "choice",
-        name: "role",
-        message: "What is your team role?",
-        choices: ["Manager", "Engineer", "Intern"],
-    },
-    ])
-    .then((answers) => {
-        switch (answers.role) {
-        case "Manager":
-            addManager();
-            break;
-        case "Engineer":
-            addEngineer();
-            break;
-        case "Intern":
-            addIntern();
-            break;
-        default:
-            init();
-        }
-    });
-};
-//Functions to ask Role specific Questions and to seperate into different objects
-const addEngineer = () => {
-  inquirer
-    .prompt([
+        message: "Team memember's email:",
+        when: (answers) => answers.role !== "Exit"
+      },
+      {
+        type: "input",
+        name: "office",
+        message: "What is your office number?",
+        when: (answers) => answers.role === "Manager"
+      },
       {
         type: "input",
         name: "github",
         message: "What is your Github Username?",
+        when: (answers) => answers.role === "Engineer"
       },
-    ])
-    .then((answers) => {
-      const Engineer = new Engineer(
-        answers.name,
-        answers.id,
-        answers.email,
-        answers.git
-      );
-      // createTeam(){}
-    });
-};
-const addIntern = () => {
-  inquirer
-    .prompt([
       {
         type: "input",
         name: "school",
         message: "What School do you attend?",
+        when:(answers) => answers.role === "Intern"
       },
     ])
     .then((answers) => {
-      const Intern = new Intern(
+      switch (answers.role) {
+        case "Manager":
+          addManager(answers);
+          break;
+        case "Engineer":
+          addEngineer(answers);
+          break;
+        case "Intern":
+          addIntern(answers);
+          break;
+        //default: init();
+      }
+      console.log(teamArr,'^________________^')
+    });
+};
+//Functions to ask Role specific Questions and to seperate into different objects
+const addEngineer = (answers) => {
+      let engineer = new Engineer(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.github
+      );
+  teamArr.push(engineer);
+  createTeam()
+};
+
+const addIntern = (answers) => {
+      let intern = new Intern(
         answers.name,
         answers.id,
         answers.email,
         answers.school
       );
-    });
+  teamArr.push(intern);
+  createTeam()
 };
-const addManager = () => {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "office",
-        message: "What is your office number?",
-      },
-    ])
-    .then((answers) => {
-      const Manager = new Manager(
+const addManager = (answers) => {
+      let manager = new Manager(
         answers.name,
         answers.id,
         answers.email,
         answers.office
       );
-    });
+  teamArr.push(manager);
+  createTeam()
 };
 
-///NEW FUNCTION
-const addAnother = () => {
-  inquirer.prompt([
-      {
-        type: "choice",
-        name: "add",
-        message: "Would you like to add another memeber to your team?",
-        choices: ["Yes", "No"],
-    }])
-    .then((answers) => {
-        if (answers.add === "Yes") {
-        inquirer.prompt([
-        {
-            type: "list",
-            name: "team",
-            choices: ["An Engineer", "An Intern", "No more team memebers"],
-        }]);
-    }
-        return init();
-    });
-};
+createTeam()
 
-const init = () => {
+
+/* const init = () => {
     createTeam()
-    .then((info) => writeFileAsync("index.html", generateHTML(info)))
+    .then((info) => writeFileAysnc("index.html", () =>))
     .then(() => console.log("Successfully wrote to index.html"))
     .catch((err) => console.error(err));
 };
-init();
+init(); */
