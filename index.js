@@ -4,7 +4,7 @@ const fs = require("fs");
 const util = require("util");
 
 //Code to input prompts into HTML
-const generateHTML = require('./src/generateRole');
+const generateRole = require('./src/generateRole');
 
 //Classes for Javascript
 const Employee = require("./lib/employee");
@@ -73,14 +73,15 @@ const createTeam = () =>  {
         case "Intern":
           addIntern(answers);
           break;
-        //default: init();
+        default: console.log('LINE76','**************', manager, '***************')/* init(); */
       }
-      console.log(teamArr,'^________________^')
+      console.log('LINE76','^________________^')
+      console.log('LINE76',teamArr[Manager],'*******________________*****', manager)
     });
 };
 //Functions to ask Role specific Questions and to seperate into different objects
 const addEngineer = (answers) => {
-      let engineer = new Engineer(
+  const engineer = new Engineer(
         answers.name,
         answers.id,
         answers.email,
@@ -91,7 +92,7 @@ const addEngineer = (answers) => {
 };
 
 const addIntern = (answers) => {
-      let intern = new Intern(
+  const intern = new Intern(
         answers.name,
         answers.id,
         answers.email,
@@ -101,7 +102,7 @@ const addIntern = (answers) => {
   createTeam()
 };
 const addManager = (answers) => {
-      let manager = new Manager(
+  const manager = new Manager(
         answers.name,
         answers.id,
         answers.email,
@@ -116,8 +117,8 @@ createTeam()
 
 /* const init = () => {
     createTeam()
-    .then((info) => writeFileAysnc("index.html", () =>))
+    .then((teamArr) => writeFileAysnc("index.html", generateRole(teamArr)))
     .then(() => console.log("Successfully wrote to index.html"))
     .catch((err) => console.error(err));
 };
-init(); */
+init();  */

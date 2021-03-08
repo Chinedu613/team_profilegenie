@@ -1,5 +1,5 @@
-const generatehtml = answers => {
-    return `
+const generateRole = (teamArr) => {
+  return `
     
     <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +106,28 @@ const generatehtml = answers => {
     </footer>
 </body>
 </html>
-    `
-}
-module.exports = generatehtml
+    `;
+};
+
+ const Manager = {
+  name: "CHin",
+  id: "001",
+  email: "@gmail.com",
+  office: "002",
+}; 
+
+const Engineer = {
+  name: "Natacha",
+  id: "002",
+  email: "@gmail.com",
+  github: undefined,
+};
+
+const teamArr = [Manager, Engineer];
+
+let managerRole = teamArr.filter(Engineer => teamArr.Engineer);
+
+
+console.log("---------------", managerRole, "_________________________");
+
+module.exports = generateRole;
