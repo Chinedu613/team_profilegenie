@@ -20,7 +20,7 @@
 ## DESCRIPTION
 
 This application will use node to create a dynamic team page through a series of prompts using inquirer
-
+[youtube link to show usage](https://youtu.be/ZcFPLgMuh7Q)
 
 ## INSTALLATION
 
