@@ -77,17 +77,7 @@ const generateRole = (teamArr) => {
                                             <div class="col-md-4">
                                                 <img src="..." alt="...">
                                             </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">An item</li>
-                                                    <li class="list-group-item">A second item</li>
-                                                    <li class="list-group-item">A third item</li>
-                                                </ul>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
