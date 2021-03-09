@@ -99,25 +99,5 @@ const generateRole = (teamArr) => {
     `;
 };
 
- const Manager = {
-  name: "CHin",
-  id: "001",
-  email: "@gmail.com",
-  office: "002",
-}; 
-
-const Engineer = {
-  name: "Natacha",
-  id: "002",
-  email: "@gmail.com",
-  github: undefined,
-};
-
-const teamArr = [Manager, Engineer];
-
-let managerRole = teamArr.filter(Engineer => teamArr.Engineer);
-
-
-console.log("---------------", managerRole, "_________________________");
 
 module.exports = generateRole;

@@ -82,25 +82,25 @@ const writeFileAysnc = util.promisify(fs.writeFile);
           type: "input",
           name: "name",                                                                                
           message: "Please add team memeber's name:",
-          when: (answers) => answers.role !== "Exit" 
+          
         },
         {
           type: "input",
           name: "id",
           message: "Team memember's employee ID:",
-          when: (answers) => answers.role !== "Exit"
+        
         },
         {
           type: "input",
           name: "email",
           message: "Team memember's email:",
-          when: (answers) => answers.role !== "Exit"
+          
         },
         {
           type: "input",
           name: "github",
           message: "What is your Github Username?",
-          when: (answers) => answers.role === "Engineer"
+          
         },
       ])
       .then((answers) => {
@@ -108,7 +108,7 @@ const writeFileAysnc = util.promisify(fs.writeFile);
               answers.name,
               answers.id,
               answers.email,
-              answers.office,
+              answers.github,
               answers.role
             );
             console.log(engineer);
@@ -186,9 +186,6 @@ const writeFileAysnc = util.promisify(fs.writeFile);
       }
       
     });
-      console.log('********',teamArr,'******************');
-      // add the portion of HTML to dispaly the beggining of the file
-      // .. with the end of the file
       
     };
 
@@ -243,7 +240,7 @@ const teamCards = (teamArr, htmlString) =>{
       <div class="row">
         <div class="col">
           <div class="container">
-            <div class="row">${htmlString}</div>
+            <div class="row">${htmlString.join('')}</div>
           </div>
         </div>
       </div>
